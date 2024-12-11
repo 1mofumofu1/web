@@ -181,20 +181,44 @@
     </div>
 
     <script>
-        document.getElementById('bollywoodForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const department = document.getElementById('department').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            
-            alert(`Thank you for joining, ${name}!\nYou have selected ${department} department.\nYour phone number is ${phoneNumber}.`);
-            
-            // Here you would typically send this data to a server
-            console.log('Form submitted:', { name, department, phoneNumber });
-            
-            // Clear the form
-            this.reset();
-        });
+        async function submitName(event) {
+            event.preventDefault();
+
+            // Get the input values
+            const name = document.getElementById("name").value;
+            const department = document.getElementById("department").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+
+            if (!name || !department || !phoneNumber) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Define the URL of your Google Apps Script
+            const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
+
+            try {
+                // Fetch data from the Google Apps Script URL
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.columnA) {
+                    // Display the value of columnA from the response
+                    document.getElementById("result").textContent = `Column A: ${data.columnA}`;
+                    document.getElementById("status").textContent = `Status: ${data.columnE}`;
+                } else {
+                    // Handle the case where name is not found
+                    document.getElementById("result").textContent = "Name not found.";
+                    document.getElementById("status").textContent = "";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an error with the request.");
+            }
+        }
+
+        // Add the submit event listener to the form
+        document.getElementById('bollywoodForm').addEventListener('submit', submitName);
     </script>
 </body>
 </html>
