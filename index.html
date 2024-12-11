@@ -180,6 +180,7 @@
 
             <h1>Your Lucky Draw Number:</h1>
             <p id="result"></p>
+            //<p id="status"></p>
         </div>
     </div>
 
@@ -199,19 +200,25 @@
                 }
 
                 // Define the URL of your Google Apps Script
-                const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
+                const url = https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)};
 
                 try {
                     // Fetch data from the Google Apps Script URL
                     const response = await fetch(url);
                     const data = await response.json();
 
+                    // Ensure elements exist before setting text content
+                    const resultElement = document.getElementById("result");
+                    const statusElement = document.getElementById("status");
+
                     if (data.columnA) {
-                        // Show the Lucky Draw number as a popup
-                        alert(`Lucky Draw Number: ${data.columnA}`);
+                        // Display the value of columnA from the response
+                        resultElement.textContent = Lucky Draw: ${data.columnA};
+                        statusElement.textContent = Status: ${data.columnE};
                     } else {
                         // Handle the case where name is not found
-                        alert("Name not found.");
+                        resultElement.textContent = "Name not found.";
+                        statusElement.textContent = "";
                     }
                 } catch (error) {
                     console.error("Error:", error);
@@ -224,5 +231,4 @@
         });
     </script>
 </body>
-
 </html>
