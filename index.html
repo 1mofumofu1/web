@@ -4,18 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Name</title>
+    <style>
+        /* Bollywood Inspired Colors */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4e1d2;
+            color: #d41c10;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1515378791036-0648a3ef077d'); /* Bollywood style background */
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #fff;
+            font-size: 36px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: 50px;
+        }
+
+        input, select {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: 2px solid #d41c10;
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            font-size: 20px;
+            color: white;
+            background-color: #f39c12;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #e67e22;
+        }
+
+        h3 {
+            color: #fff;
+            font-family: 'Georgia', serif;
+            margin-top: 40px;
+        }
+
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 20px;
+        }
+
+        #status {
+            font-size: 20px;
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+
+        /* Animation for name entry */
+        input:focus, select:focus {
+            border-color: #f39c12;
+            box-shadow: 0px 0px 10px rgba(243, 156, 18, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+    </style>
     <script>
         async function submitName() {
-            // Get the input value
+            // Get the input values
             const name = document.getElementById("name").value;
+            const department = document.getElementById("department").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
 
-            if (!name) {
-                alert("Please enter a name.");
+            if (!name || !department || !phoneNumber) {
+                alert("Please fill in all fields.");
                 return;
             }
 
             // Define the URL of your Google Apps Script
-            const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}`;
+            const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
 
             try {
                 // Fetch data from the Google Apps Script URL
@@ -39,8 +120,25 @@
     </script>
 </head>
 <body>
-    <h1>Enter Your Name</h1>
+    <h1>Enter Your Details</h1>
+    
+    <!-- Name Input -->
     <input type="text" id="name" placeholder="Enter name" />
+    
+    <!-- Department Dropdown -->
+    <select id="department">
+        <option value="">Select Department</option>
+        <option value="HR">Human Resources</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Sales">Sales</option>
+        <option value="Finance">Finance</option>
+    </select>
+    
+    <!-- Phone Number Input -->
+    <input type="text" id="phoneNumber" placeholder="Enter phone number" />
+    
+    <!-- Submit Button -->
     <button onclick="submitName()">Submit</button>
 
     <h3>Result:</h3>
