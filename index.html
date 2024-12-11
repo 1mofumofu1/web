@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Name</title>
+    <script>
+        async function submitName() {
+            // Get the input value
+            const name = document.getElementById("name").value;
+
+            if (!name) {
+                alert("Please enter a name.");
+                return;
+            }
+
+            // Define the URL of your Google Apps Script
+            const url = `https://script.google.com/macros/s/AKfycbxnqHpLn7lr1z1_ZwHuLm9e_cAEu_nufvpOOoIir3PobpbUohoWyvPK4yMQpqecmiTErA/exec?name=${encodeURIComponent(name)}`;
+
+            try {
+                // Fetch data from the Google Apps Script URL
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.columnA) {
+                    // Display the value of columnA from the response
+                    document.getElementById("result").textContent = `Column A: ${data.columnA}`;
+                    document.getElementById("status").textContent = `Status: ${data.columnE}`;
+                } else {
+                    // Handle the case where name is not found
+                    document.getElementById("result").textContent = "Name not found.";
+                    document.getElementById("status").textContent = "";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an error with the request.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter Your Name</h1>
+    <input type="text" id="name" placeholder="Enter name" />
+    <button onclick="submitName()">Submit</button>
+
+    <h3>Result:</h3>
+    <p id="result"></p>
+    <p id="status"></p>
+</body>
+</html>
