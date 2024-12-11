@@ -133,7 +133,8 @@
             animation: shine 3s infinite;
         }
 
-         .popup-overlay {
+        /* Popup styling */
+        .popup-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -143,6 +144,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
+            z-index: 9999;
         }
         .popup-content {
             background-color: white;
@@ -241,6 +243,11 @@
                 return;
             }
 
+            // Disable the form inputs while the popup is open
+            document.getElementById("name").disabled = true;
+            document.getElementById("department").disabled = true;
+            document.getElementById("phoneNumber").disabled = true;
+
             // Define the URL of your Google Apps Script
             const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
 
@@ -263,7 +270,7 @@
                 }
 
                 // Show the custom popup
-                document.getElementById("customPopup").style.display = "block";
+                document.getElementById("customPopup").style.display = "flex";
             } catch (error) {
                 console.error("Error:", error);
                 alert("There was an error with the request.");
@@ -276,6 +283,10 @@
         // Close the popup when the close button is clicked
         document.getElementById("closePopup").addEventListener("click", () => {
             document.getElementById("customPopup").style.display = "none";
+            // Enable the form inputs after closing the popup
+            document.getElementById("name").disabled = false;
+            document.getElementById("department").disabled = false;
+            document.getElementById("phoneNumber").disabled = false;
         });
     </script>
 </body>
