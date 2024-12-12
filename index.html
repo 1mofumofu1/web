@@ -16,13 +16,33 @@
             font-family: Arial, sans-serif;
         }
 
-       
+        .image-title img {
+            width: 400px;
+            /* Adjust size as needed */
+            height: auto;
+            /* Keep aspect ratio */
+            display: block;
+            /* Remove any extra space below the image */
+            margin: 0 auto;
+            /* Center the image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
 
         .container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(to bottom right, #ff6b6b, #feca57, #ff9ff3);
+        }
+
+        .container-inner {
+            background-color: #00000048;
+            padding: 10px;
+            margin-bottom: 10px;
         }
 
         .form-container {
@@ -39,7 +59,6 @@
             /* Set the background image size to 50% of its original size */
             background-position: center;
             background-repeat: no-repeat;
-
         }
 
         .film-reel {
@@ -75,8 +94,17 @@
             font-size: 2.25rem;
             font-weight: bold;
             text-align: center;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
+            color: #4e3900;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-family: 'Baloo 2', cursive;
+            font-size: 10rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.1rem;
+            color: #700820;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -87,6 +115,7 @@
 
         .form-group {
             margin-bottom: 1rem;
+            width: 95%;
         }
 
         .custom-dropdown {
@@ -126,7 +155,7 @@
             display: block;
             font-size: 0.875rem;
             font-weight: 500;
-            color: #4a5568;
+            color: #ffffff;
             margin-bottom: 0.5rem;
         }
 
@@ -141,13 +170,14 @@
 
         button {
             width: 100%;
-            background-color: #f39c12;
-            color: white;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-family: 'Baloo 2', cursive;
             font-weight: bold;
-            padding: 0.75rem;
+            padding: 0.2rem;
             border: none;
             border-radius: 9999px;
-            font-size: 1rem;
+            font-size: 1.3rem;
             cursor: pointer;
             transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
             position: relative;
@@ -189,7 +219,7 @@
         }
 
         .popup-content {
-            background-color: white;
+            background-color: rgb(255, 255, 255);
             padding: 20px;
             border-radius: 8px;
             width: 300px;
@@ -257,29 +287,35 @@
         <div class="form-container">
             <div class="film-reel"></div>
             <div class="stars"></div>
-            <h1>BFA Bollywood Dinner</h1>
+            <div class="image-title">
+                <!-- Insert image here -->
+                <img src="Logo-Annual-Dinner.png" alt="Logo">
+            </div>
             <form id="bollywoodForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <div class="custom-dropdown">
-                        <input type="text" id="name" placeholder="Your Name" autocomplete="on">
-                        <div class="dropdown-menu" id="dropdownMenu"></div>
+                <div class="container-inner">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <div class="custom-dropdown">
+                            <input type="text" id="name" placeholder="Your Name" autocomplete="on">
+                            <div class="dropdown-menu" id="dropdownMenu"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="department">Department</label>
-                    <select id="department" name="department" required>
-                        <option value="">Select Department</option>
-                        <option value="HR">Human Resources</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Finance">Finance</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" id="phoneNumber" placeholder="Your Phone Number" required>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="HR">Human Resources</option>
+                            <option value="Engineering">Technical Services</option>
+                            <option value="Marketing">Growth & Portfolio</option>
+                            <option value="Sales">IT & Technical Data</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Finance">Finera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="phoneNumber" placeholder="Your Phone Number" required>
+                    </div>
                 </div>
                 <button type="submit">Submit</button>
             </form>
@@ -289,104 +325,29 @@
     <!-- Custom Popup -->
     <div id="customPopup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
-            <h3>Result:</h3>
-            <p id="result"></p>
-            <p id="status"></p>
-            <button id="closePopup">Close</button>
+            <h1>Lucky Number!!</h1>
+            <h2 id="result"></h2>
+            <h3>Remember to win!!</h3>
         </div>
     </div>
 
     <script>
         const rawNames = [
-            "Eddy | BeicipFranlabAsia",
-            "Afiq | BeicipFranlabAsia",
-            "Noorbaizura | BeicipFranlabAsia",
-            "Dr. Zuhar | BeicipFranlabAsia",
-            "Mohamad Othman | BeicipFranlabAsia",
-            "Nuradilah | BeicipFranlabAsia",
-            "Nurwaheeda | BeicipFranlabAsia",
-            "Denise | BeicipFranlabAsia",
-            "Marianti | BeicipFranlabAsia",
-            "Dr. Jamaal | BeicipFranlabAsia",
-            "Fatin | BeicipFranlabAsia",
-            "Ezzah | BeicipFranlabAsia",
-            "Raihana | BeicipFranlabAsia",
-            "Natasya | BeicipFranlabAsia",
-            "Amirah | BeicipFranlabAsia",
-            "Syed Amir | BeicipFranlabAsia",
-            "Herwin | BeicipFranlabAsia",
-            "Shafiq | BeicipFranlabAsia",
-            "Khairul | BeicipFranlabAsia",
-            "Farhan | BeicipFranlabAsia",
-            "Qamarul | BeicipFranlabAsia",
-            "Indra | BeicipFranlabAsia",
-            "Fauzi | BeicipFranlabAsia",
-            "Izzat | BeicipFranlabAsia",
-            "Alya | BeicipFranlabAsia",
-            "Mujeera | BeicipFranlabAsia",
-            "Linda | BeicipFranlabAsia",
-            "Adiba | BeicipFranlabAsia",
-            "Puteri | BeicipFranlabAsia",
-            "Anis | BeicipFranlabAsia (NR)",
-            "Devandra | BeicipFranlabAsia",
-            "Firdaus | BeicipFranlabAsia",
-            "Kamal | BeicipFranlabAsia",
-            "Rasmir | BeicipFranlabAsia",
-            "Mawaddah | BeicipFranlabAsia",
-            "Dr. Annur | BeicipFranlabAsia",
-            "Khaamisah | BeicipFranlabAsia",
-            "Raihah | BeicipFranlabAsia",
-            "Nurqueen | BeicipFranlabAsia",
-            "Ankit Kumar (Dec)",
-            "Jasmeen | BeicipFranlabAsia",
-            "Atikah - | BeicipFranlabAsia",
-            "Hawa - | BeicipFranlabAsia",
-            "Naomi - Intern | BeicipFranlabAsia",
-            "Syaza | BeicipFranlabAsia",
-            "Naim | BeicipFranlabAsia",
-            "Alexander | BeicipFranlabAsia",
-            "Danish | BeicipFranlabAsia",
-            "Zafri - Associate | BeicipFranlabAsia",
-            "Sean | BeicipFranlabAsia (Dec)",
-            "Tsania | BeicipFranlabAsia",
-            "Kanageswary | Beicipfranlabasia",
-            "Mutia | BeicipFranlabAsia",
-            "Sabrina | BeicipFranlabAsia",
-            "Marikan | BeicipFranlabAsia",
-            "Dr. Anindito | BeicipFranlabAsia",
-            "Zubair | BeicipFranlabAsia",
-            "Yusuf | BeicipFranlabAsia",
-            "Sufizikri | BeicipFranlabAsia",
-            "Salwa | BeicipFranlabAsia (NR)",
-            "Faiqah | BeicipFranlabAsia",
-            "Norafiza | BeicipFranlabAsia",
-            "Nuriffa | BeicipFranlabAsia",
-            "Atira | BeicipFranlabAsia",
-            "Nadhirah | BeicipfranlabAsia",
-            "Hafiz | BeicipFranlabAsia",
-            "Irfan | BeicipFranlabAsia",
-            "Kam Hoong | BeicipFranlabAsia",
-            "Arif - Associate | BeicipFranlabAsia",
-            "Simon | BeicipFranlabAsia (NR)",
-            "Syukri - Associate | BeicipFranlabAsia",
-            "Aliff  | BeicipFranlabAsia",
-            "Ashraf | BeicipFranlabAsia",
-            "Lukman | BeicipFranlabAsia (NR)",
-            "Hafizuddin | BeicipFranlabAsia",
-            "Adhwayasya | BeicipFranlabAsia",
-            "Jasatira | BeicipFranlabAsia",
-            "Syahira | BeicipFranlabAsia",
-            "Najwa | BeicipFranlabAsia",
-            "Puspa | BeicipFranlabAsia",
-            "Agata | BeicipFranlabAsia",
-            "Yuhanis | BeicipFranlabAsia",
-            "Siva - | BeicipFranlabAsia",
-            "Prama | BeicipFranlabAsia",
-            "Messouda Henniche Maali",
-            "Farrish | BeicipFranlabAsia",
-            "Sarah | BeicipFranlabAsia",
-            "Aliah Zamri | BeicipFranlabAsia (Dec)"
+            "Eddy", "Afiq", "Noorbaizura", "Dr. Zuhar", "Mohamad Othman", "Nuradilah",
+            "Nurwaheeda", "Denise", "Marianti", "Dr. Jamaal", "Fatin", "Ezzah",
+            "Raihana", "Natasya", "Amirah", "Syed Amir", "Herwin", "Shafiq", "Khairul",
+            "Farhan", "Qamarul", "Indra", "Fauzi", "Izzat", "Alya", "Mujeera", "Linda",
+            "Adiba", "Puteri", "Anis", "Devandra", "Firdaus", "Kamal", "Rasmir", "Mawaddah",
+            "Dr. Annur", "Khaamisah", "Raihah", "Nurqueen", "Ankit", "Jasmeen", "Atikah",
+            "Hawa", "Naomi", "Syaza", "Naim", "Alexander", "Danish", "Zafri", "Sean",
+            "Tsania", "Kanageswary", "Mutia", "Sabrina", "Marikan", "Dr. Anindito", "Zubair",
+            "Yusuf", "Sufizikri", "Salwa", "Faiqah", "Norafiza", "Nuriffa", "Atira",
+            "Nadhirah", "Hafiz", "Irfan", "Kam Hoong", "Arif", "Simon", "Syukri", "Aliff",
+            "Ashraf", "Lukman", "Hafizuddin", "Adhwayasya", "Jasatira", "Syahira", "Najwa",
+            "Puspa", "Agata", "Yuhanis", "Siva", "Prama", "Messouda", "Farrish", "Sarah",
+            "Aliah"
         ];
+
 
         const names = rawNames.map(name => name.split('|')[0].trim());
 
@@ -449,11 +410,11 @@
                 const statusElement = document.getElementById("status");
 
                 if (data.columnA) {
-                    resultElement.textContent = `Column A: ${data.columnA}`;
-                    statusElement.textContent = `Status: ${data.columnE}`;
+                    resultElement.textContent = `${data.columnA}`;
+                    // statusElement.textContent = `${data.columnE}`;
                 } else {
                     resultElement.textContent = "Name not found.";
-                    statusElement.textContent = "";
+                    //statusElement.textContent = "";
                 }
 
                 document.getElementById("customPopup").style.display = "flex";
