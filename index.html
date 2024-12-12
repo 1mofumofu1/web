@@ -195,33 +195,33 @@
             <div class="stars"></div>
             <h1>BFA Bollywood Dinner</h1>
             <form id="bollywoodForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" list="nameOptions" placeholder="Your Name" required>
-                <datalist id="nameOptions"></datalist>
-            </div>
-            <div class="form-group">
-                <label for="department">Department</label>
-                <select id="department" name="department" required>
-                    <option value="">Select Department</option>
-                    <option value="HR">Human Resources</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Sales">Sales</option>
-                    <option value="Finance">Finance</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" list="nameOptions" placeholder="Your Name" required>
+                    <datalist id="nameOptions"></datalist>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="">Select Department</option>
+                        <option value="HR">Human Resources</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Finance">Finance</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
 
     <!-- Custom Popup -->
-    <div id="customPopup" class="popup-overlay">
+    <div id="customPopup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
             <h3>Result:</h3>
             <p id="result"></p>
@@ -231,27 +231,28 @@
     </div>
 
     <script>
-        fetch('./name.json') // Use relative path to access the local file
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const nameOptions = document.getElementById('nameOptions');
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.name;
-                nameOptions.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error));
-        
+        // Load names from the JSON file
+        fetch('./name.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch name.json: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const nameOptions = document.getElementById('nameOptions');
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.name;
+                    nameOptions.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        // Handle form submission
         async function submitName(event) {
             event.preventDefault();
 
-            // Get the input values
             const name = document.getElementById("name").value;
             const department = document.getElementById("department").value;
             const phoneNumber = document.getElementById("phoneNumber").value;
@@ -261,16 +262,9 @@
                 return;
             }
 
-            // Disable the form inputs while the popup is open
-            document.getElementById("name").disabled = true;
-            document.getElementById("department").disabled = true;
-            document.getElementById("phoneNumber").disabled = true;
-
-            // Define the URL of your Google Apps Script
             const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
 
             try {
-                // Fetch data from the Google Apps Script URL
                 const response = await fetch(url);
                 const data = await response.json();
 
@@ -278,16 +272,13 @@
                 const statusElement = document.getElementById("status");
 
                 if (data.columnA) {
-                    // Display the value of columnA from the response
                     resultElement.textContent = `Column A: ${data.columnA}`;
                     statusElement.textContent = `Status: ${data.columnE}`;
                 } else {
-                    // Handle the case where name is not found
                     resultElement.textContent = "Name not found.";
                     statusElement.textContent = "";
                 }
 
-                // Show the custom popup
                 document.getElementById("customPopup").style.display = "flex";
             } catch (error) {
                 console.error("Error:", error);
@@ -295,16 +286,10 @@
             }
         }
 
-        // Add the submit event listener to the form
         document.getElementById('bollywoodForm').addEventListener('submit', submitName);
 
-        // Close the popup when the close button is clicked
         document.getElementById("closePopup").addEventListener("click", () => {
             document.getElementById("customPopup").style.display = "none";
-            // Enable the form inputs after closing the popup
-            document.getElementById("name").disabled = false;
-            document.getElementById("department").disabled = false;
-            document.getElementById("phoneNumber").disabled = false;
         });
     </script>
 </body>
