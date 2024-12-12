@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,27 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
 
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: Arial, sans-serif;
         }
 
+        body {
+    background-image: url('Dinner Form Background.png');
+    background-size: 40%;  /* Set the background image size to 50% of its original size */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
         .container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom right, #ff6b6b, #feca57, #ff9ff3);
         }
 
         .form-container {
@@ -39,7 +48,7 @@
             left: -50px;
             width: 100px;
             height: 100px;
-            border: 15px dashed rgba(0,0,0,0.1);
+            border: 15px dashed rgba(0, 0, 0, 0.1);
             border-radius: 50%;
             animation: spin 20s linear infinite;
         }
@@ -50,12 +59,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0));
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 50px 160px, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0));
             background-repeat: repeat;
             background-size: 200px 200px;
             animation: twinkle 5s ease-in-out infinite alternate;
@@ -68,7 +77,7 @@
             text-align: center;
             margin-bottom: 1.5rem;
             color: #e67e22;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         form {
@@ -80,6 +89,39 @@
             margin-bottom: 1rem;
         }
 
+        .custom-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            max-height: 150px;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        .dropdown-menu div {
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-menu div:hover {
+            background-color: #f1f1f1;
+        }
+
         label {
             display: block;
             font-size: 0.875rem;
@@ -88,7 +130,8 @@
             margin-bottom: 0.5rem;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 0.5rem;
             border: 1px solid #e2e8f0;
@@ -123,12 +166,10 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0.3) 0%,
-                rgba(255, 255, 255, 0.1) 50%,
-                transparent 100%
-            );
+            background: linear-gradient(to bottom right,
+                    rgba(255, 255, 255, 0.3) 0%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 100%);
             transform: rotate(45deg);
             animation: shine 3s infinite;
         }
@@ -146,6 +187,7 @@
             align-items: center;
             z-index: 9999;
         }
+
         .popup-content {
             background-color: white;
             padding: 20px;
@@ -153,12 +195,15 @@
             width: 300px;
             text-align: center;
         }
+
         .popup-content h3 {
             margin-bottom: 10px;
         }
+
         .popup-content p {
             margin: 5px 0;
         }
+
         .popup-content button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -168,26 +213,45 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .popup-content button:hover {
             background-color: #0056b3;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         @keyframes shine {
-            0% { left: -50%; top: -50%; }
-            100% { left: 150%; top: 150%; }
+            0% {
+                left: -50%;
+                top: -50%;
+            }
+
+            100% {
+                left: 150%;
+                top: 150%;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
@@ -197,8 +261,10 @@
             <form id="bollywoodForm">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" list="nameOptions" placeholder="Your Name" required>
-                    <datalist id="nameOptions"></datalist>
+                    <div class="custom-dropdown">
+                        <input type="text" id="name" placeholder="Your Name" autocomplete="on">
+                        <div class="dropdown-menu" id="dropdownMenu"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="department">Department</label>
@@ -213,7 +279,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" pattern="[0-9]{10}" title="Enter a valid 10-digit phone number" required>
+                    <input type="text" id="phoneNumber" placeholder="Your Phone Number" required>
                 </div>
                 <button type="submit">Submit</button>
             </form>
@@ -231,19 +297,133 @@
     </div>
 
     <script>
-        const names = [
-        { "name": "Alice" },
-        { "name": "Bob" },
-        { "name": "Charlie" },
-        { "name": "Diana" },
-        { "name": "Eve" }
+        const rawNames = [
+            "Eddy | BeicipFranlabAsia",
+            "Afiq | BeicipFranlabAsia",
+            "Noorbaizura | BeicipFranlabAsia",
+            "Dr. Zuhar | BeicipFranlabAsia",
+            "Mohamad Othman | BeicipFranlabAsia",
+            "Nuradilah | BeicipFranlabAsia",
+            "Nurwaheeda | BeicipFranlabAsia",
+            "Denise | BeicipFranlabAsia",
+            "Marianti | BeicipFranlabAsia",
+            "Dr. Jamaal | BeicipFranlabAsia",
+            "Fatin | BeicipFranlabAsia",
+            "Ezzah | BeicipFranlabAsia",
+            "Raihana | BeicipFranlabAsia",
+            "Natasya | BeicipFranlabAsia",
+            "Amirah | BeicipFranlabAsia",
+            "Syed Amir | BeicipFranlabAsia",
+            "Herwin | BeicipFranlabAsia",
+            "Shafiq | BeicipFranlabAsia",
+            "Khairul | BeicipFranlabAsia",
+            "Farhan | BeicipFranlabAsia",
+            "Qamarul | BeicipFranlabAsia",
+            "Indra | BeicipFranlabAsia",
+            "Fauzi | BeicipFranlabAsia",
+            "Izzat | BeicipFranlabAsia",
+            "Alya | BeicipFranlabAsia",
+            "Mujeera | BeicipFranlabAsia",
+            "Linda | BeicipFranlabAsia",
+            "Adiba | BeicipFranlabAsia",
+            "Puteri | BeicipFranlabAsia",
+            "Anis | BeicipFranlabAsia (NR)",
+            "Devandra | BeicipFranlabAsia",
+            "Firdaus | BeicipFranlabAsia",
+            "Kamal | BeicipFranlabAsia",
+            "Rasmir | BeicipFranlabAsia",
+            "Mawaddah | BeicipFranlabAsia",
+            "Dr. Annur | BeicipFranlabAsia",
+            "Khaamisah | BeicipFranlabAsia",
+            "Raihah | BeicipFranlabAsia",
+            "Nurqueen | BeicipFranlabAsia",
+            "Ankit Kumar (Dec)",
+            "Jasmeen | BeicipFranlabAsia",
+            "Atikah - | BeicipFranlabAsia",
+            "Hawa - | BeicipFranlabAsia",
+            "Naomi - Intern | BeicipFranlabAsia",
+            "Syaza | BeicipFranlabAsia",
+            "Naim | BeicipFranlabAsia",
+            "Alexander | BeicipFranlabAsia",
+            "Danish | BeicipFranlabAsia",
+            "Zafri - Associate | BeicipFranlabAsia",
+            "Sean | BeicipFranlabAsia (Dec)",
+            "Tsania | BeicipFranlabAsia",
+            "Kanageswary | Beicipfranlabasia",
+            "Mutia | BeicipFranlabAsia",
+            "Sabrina | BeicipFranlabAsia",
+            "Marikan | BeicipFranlabAsia",
+            "Dr. Anindito | BeicipFranlabAsia",
+            "Zubair | BeicipFranlabAsia",
+            "Yusuf | BeicipFranlabAsia",
+            "Sufizikri | BeicipFranlabAsia",
+            "Salwa | BeicipFranlabAsia (NR)",
+            "Faiqah | BeicipFranlabAsia",
+            "Norafiza | BeicipFranlabAsia",
+            "Nuriffa | BeicipFranlabAsia",
+            "Atira | BeicipFranlabAsia",
+            "Nadhirah | BeicipfranlabAsia",
+            "Hafiz | BeicipFranlabAsia",
+            "Irfan | BeicipFranlabAsia",
+            "Kam Hoong | BeicipFranlabAsia",
+            "Arif - Associate | BeicipFranlabAsia",
+            "Simon | BeicipFranlabAsia (NR)",
+            "Syukri - Associate | BeicipFranlabAsia",
+            "Aliff  | BeicipFranlabAsia",
+            "Ashraf | BeicipFranlabAsia",
+            "Lukman | BeicipFranlabAsia (NR)",
+            "Hafizuddin | BeicipFranlabAsia",
+            "Adhwayasya | BeicipFranlabAsia",
+            "Jasatira | BeicipFranlabAsia",
+            "Syahira | BeicipFranlabAsia",
+            "Najwa | BeicipFranlabAsia",
+            "Puspa | BeicipFranlabAsia",
+            "Agata | BeicipFranlabAsia",
+            "Yuhanis | BeicipFranlabAsia",
+            "Siva - | BeicipFranlabAsia",
+            "Prama | BeicipFranlabAsia",
+            "Messouda Henniche Maali",
+            "Farrish | BeicipFranlabAsia",
+            "Sarah | BeicipFranlabAsia",
+            "Aliah Zamri | BeicipFranlabAsia (Dec)"
         ];
-        
-        const nameOptions = document.getElementById('nameOptions');
-        names.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.name;
-            nameOptions.appendChild(option);
+
+        const names = rawNames.map(name => name.split('|')[0].trim());
+
+        const input = document.getElementById('name');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Populate dropdown
+        input.addEventListener('input', () => {
+            const value = input.value.toLowerCase();
+            dropdownMenu.innerHTML = '';
+
+            if (value) {
+                const filteredNames = names.filter(name => name.toLowerCase().includes(value));
+                if (filteredNames.length) {
+                    filteredNames.forEach(name => {
+                        const item = document.createElement('div');
+                        item.textContent = name;
+                        item.addEventListener('click', () => {
+                            input.value = name;
+                            dropdownMenu.classList.remove('open');
+                        });
+                        dropdownMenu.appendChild(item);
+                    });
+                    dropdownMenu.classList.add('open');
+                } else {
+                    dropdownMenu.classList.remove('open');
+                }
+            } else {
+                dropdownMenu.classList.remove('open');
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropdownMenu.contains(e.target) && e.target !== input) {
+                dropdownMenu.classList.remove('open');
+            }
         });
 
         // Handle form submission
@@ -290,4 +470,5 @@
         });
     </script>
 </body>
+
 </html>
