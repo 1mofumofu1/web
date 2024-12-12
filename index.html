@@ -231,8 +231,13 @@
     </div>
 
     <script>
-        fetch('https://raw.githubusercontent.com/1mofumofu1/web/main/name.json')
-        .then(response => response.json())
+        fetch('./name.json') // Use relative path to access the local file
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(data => {
             const nameOptions = document.getElementById('nameOptions');
             data.forEach(item => {
