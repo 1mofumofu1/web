@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bollywood Fan Club</title>
+    <title>BFA Annual Dinner</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
 
@@ -195,27 +195,28 @@
             <div class="stars"></div>
             <h1>BFA Bollywood Dinner</h1>
             <form id="bollywoodForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Your Bollywood Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="department">Department</label>
-                    <select id="department" name="department" required>
-                        <option value="">Select Department</option>
-                        <option value="HR">Human Resources</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Finance">Finance</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" list="nameOptions" placeholder="Your Name" required>
+                <datalist id="nameOptions"></datalist>
+            </div>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" required>
+                    <option value="">Select Department</option>
+                    <option value="HR">Human Resources</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Finance">Finance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
         </div>
     </div>
 
@@ -230,6 +231,18 @@
     </div>
 
     <script>
+        fetch('name.json')
+        .then(response => response.json())
+        .then(data => {
+            const nameOptions = document.getElementById('nameOptions');
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.name;
+                nameOptions.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+        
         async function submitName(event) {
             event.preventDefault();
 
