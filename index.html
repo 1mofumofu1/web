@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BFA Annual Dinner Registration</title>
+    <title>BFA Annual Dinner</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
 
@@ -305,12 +305,10 @@
                         <label for="department">Department</label>
                         <select id="department" name="department" required>
                             <option value="">Select Department</option>
-                            <option value="HR">Human Resources</option>
-                            <option value="Engineering">Technical Services</option>
-                            <option value="Marketing">Growth & Portfolio</option>
-                            <option value="Sales">IT & Technical Data</option>
+                            <option value="GRMS">Group Resource Management and Service</option>
                             <option value="Finance">Finance</option>
-                            <option value="Finance">Finera</option>
+                            <option value="CO">CEO Office</option>
+                            <option value="BD">Business Delivery</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -328,9 +326,14 @@
         <div class="popup-content">
             <h1>Lucky Number!!</h1>
             <h2 id="result"></h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <h3>Table No.</h3>
+                <h3 id="status"></h3>
+            </div>
             <h3>Remember to win!!</h3>
+            <img src="https://media.giphy.com/media/3XsniM1pgA5R6ZkCeX/giphy.gif" alt="Lucky GIF" style="width: 100%; max-width: 400px; margin-top: 20px;">
         </div>
-    </div>
+    </div>       
 
     <script>
         const rawNames = [
@@ -401,7 +404,7 @@
                 return;
             }
 
-            const url = `https://script.google.com/macros/s/AKfycbx8hSGiKw45y_x3xD0uR18q8uFMtcLccqy2FKtH7PeXnlpKqVJPNrQbwc-xSzIZvUVIHA/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
+            const url = `https://script.google.com/macros/s/AKfycbzDWk6pyLoJ62S1QuJotFCMv4WqXeoVkZKWAblq0Hnrwsfz9FIsXUX5kgbc9c0j96L8hg/exec?name=${encodeURIComponent(name)}&department=${encodeURIComponent(department)}&phoneNumber=${encodeURIComponent(phoneNumber)}`;
 
             try {
                 const response = await fetch(url);
@@ -412,7 +415,7 @@
 
                 if (data.columnA) {
                     resultElement.textContent = `${data.columnA}`;
-                    // statusElement.textContent = `${data.columnE}`;
+                    statusElement.textContent = `${data.columnC}`;
                 } else {
                     resultElement.textContent = "Name not found.";
                     //statusElement.textContent = "";
